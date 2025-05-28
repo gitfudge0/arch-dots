@@ -23,6 +23,16 @@ Run the automated setup script directly from GitHub:
 curl -fsSL https://raw.githubusercontent.com/gitfudge0/arch-dots/main/setup.sh | bash
 ```
 
+## Screenshots
+
+![Desktop Overview](screenshots/desktop.png)
+
+![Ghostty Terminal](screenshots/ghostty.png)
+
+![Wofi Launcher](screenshots/wofi.png)
+
+![Screenshot Tool](screenshots/screenshot.png)
+
 ### Manual Installation
 
 1. Clone the repository:
@@ -51,16 +61,6 @@ The installation script will:
 - Enable necessary system services (bluetooth, NetworkManager)
 - Set proper file permissions
 
-## Post-Installation
-
-After running the setup:
-
-1. Log out and log back in (or reboot)
-2. Select **Hyprland** as your session from your display manager
-3. Customize wallpapers in `~/.config/hypr/wallpapers/`
-4. Adjust waybar themes in `~/.config/waybar/`
-5. Configure terminal preferences in `~/.config/kitty/` and `~/.config/ghostty/`
-
 ## Key Bindings
 
 These are some to get you started. For a full list, check out the hyprland config.
@@ -71,30 +71,6 @@ These are some to get you started. For a full list, check out the hyprland confi
 - **Super + X**: Open wofi with power options
 - **Super + Shift + S**: Open screenshot wofi menu
 - **Super + Q**: Close window
-
-## Configuration Structure
-
-```
-~/.config/
-├── hypr/
-│   ├── hyprland.conf          # Main Hyprland configuration
-│   ├── hyprpaper.conf         # Wallpaper configuration
-│   ├── scripts/               # Custom scripts
-│   ├── wallpapers/            # Wallpaper images
-│   └── wofi/                  # Wofi launcher themes
-├── waybar/                    # Status bar configuration
-├── wofi/                      # Application launcher themes
-├── swaync/                    # Notification daemon config
-├── kitty/                     # Kitty terminal config
-├── ghostty/                   # Ghostty terminal config
-└── lazygit/                   # Git TUI configuration
-```
-
-## Screenshots
-
-### Desktop Overview
-
-![Desktop Overview](screenshots/desktop.png)
 
 ---
 
