@@ -1,0 +1,67 @@
+lastupdatecheck: 0
+recentrepos:
+    - /home/gitfudge/.dotfiles
+startuppopupversion: 5
+lastversion: v0.50.0.a0ec22c25
+customcommandshistory:
+    - git push --set-upstream --no-verify origin PEA-776
+    - git push --set-upstream --no-verify origin PEA-1683
+    - git reset HEAD~
+    - git push --set-upstream --no-verify origin PEA-1616
+    - git push --set-upstream --no-verify origin PEA-1650
+    - git push --set-upstream --no-verify origin PEA-1569-message-revert
+    - git reset --hard origin/MJ_R3_early_release
+    - git push --set-upstream --no-verify origin PEA-1546
+    - git reset --hard origin/therapy_adjustment_api
+    - git push --set-upstream --no-verify origin PEA-1437-comment
+    - git rebase --abort
+    - git commit --amend --no-verify
+    - git push --set-upstream --no-verify origin MJ_R2.5_5
+    - git push --set-upstream --no-verify origin PEA-1425-fix
+    - git push --set-upstream --no-verify origin PEA-1451
+    - git push --set-upstream --no-verify origin PEA-1437-opensearch
+    - git push --set-upstream --no-verify origin PEA-1425
+    - git log --pretty=format:'%D' HEAD^ | grep 'origin/' | head -n1 | sed 's@origin/@@' | sed 's@,.*@@'
+    - git push --set-upstream --no-verify origin PEA-1348-rework
+    - git reset --hard
+    - git push --set-upstream --no-verify orgin PEA-1348
+    - git push --force --no-verify
+    - force-push -f
+    - q
+    - push --no-verify --force
+    - git push --set-upstream --no-verify origin PEA-1348
+    - git push --set-upstream --no-verify origin PEA-1348-fix
+    - git push --set-upstream --no-verify origin PEA-1356-fix
+    - git push --set-upstream --no-verify origin PEA-1416
+    - git push --set-upstream --no-verify origin PEA-1430
+    - git push --set-upstream --no-verify origin PEA-1437
+    - git push --set-upstream --no-verify PEA-1437-opensearch
+    - git push --no-verify
+    - git push --set-upstream --no-verify origin MJ_R2.5_1
+    - git push --set-upstream --no-verify origin PEA-1474
+    - git push --set-upstream --no-verify origin PEA-1488
+    - git commit --amend
+    - git reset --hard origin/PEA-1437-opensearch
+    - git push --set-upstream --no-verify origin PEA-1437-revert
+    - git push --set-upstream --no-verify origin PEA-1437-reimplement
+    - git push --set-upstream --no-verify origin PEA-1559
+    - git reset --hard origin/PEA-1546
+    - git push --set-upstream --no-verify origin PEA-1559-fix
+    - git push --set-upstream --no-verify origin MJ_R3_early_release_1
+    - git push --set-upstream --no-verify origin PEA-1619
+    - git push --set-upstream --no-verify origin PEA-1569-sentry-fix
+    - git push --set-upstream --no-verify origin PEA-1569-consent-status
+    - git push --set-upstream --no-verify origin PEA-1651
+    - git push --set-upstream --no-verify origin PEA-1658
+    - git push --set-upstream --no-verify origin PEA-1614
+    - git reset --hard origin/MJ_R3
+    - git push --set-upstream --no-verify origin PEA-1615-nlink-idempotency
+    - qa
+hidecommandlog: false
+ignorewhitespaceindiffview: true
+diffcontextsize: 3
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always

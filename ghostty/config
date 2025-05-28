@@ -1,0 +1,14 @@
+# Ghostty configuration equivalent to WeZTerm setup
+
+# Theme - Catppuccin Mocha
+theme = "catppuccin-mocha"
+
+# Font settings
+font-family = "JetBrains Mono"
+font-size = 13
+
+# Window settings
+background-opacity = 0.9
+window-padding-x = 16
+window-padding-y = 16
+window-padding-balance = true

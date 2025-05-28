@@ -1,0 +1,113 @@
+/* @define-color bg0 #212121; */
+/*@define-color bg1 #353535;*/
+/*@define-color bg1 rgba(33,33,33,0.8);*/
+@define-color bg1 #212121;
+@define-color fg0 #eeffff;
+@define-color yellow #ffcb6b;
+
+* {
+  font-family: JetBrainsMono Nerd Font Propo;
+  font-size: 14px;
+  font-weight: 500;
+  min-height: 0;
+  border-color: @bg1;
+}
+
+window#waybar {
+  /* background-color: @bg0; */
+  background-color: transparent;
+  color: @fg0; /* didn't affect workspaces */
+}
+
+#workspaces {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 4px;
+
+  margin: 8px 4px 0px 8px;
+}
+
+#workspaces button {
+  color: @fg0;
+  border-radius: 18px;
+}
+
+#workspaces button.active {
+  color: @yellow;
+}
+
+#window {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 4px 0px 4px;
+}
+
+window#waybar.empty #window {
+  /* hide empty module */
+  background-color: transparent;
+}
+
+#tray {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 4px 0px 4px;
+}
+
+#hw {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 4px 0px 4px;
+}
+
+#cpu {
+  margin-right: 8px;
+}
+
+#memory {
+  margin-left: 8px;
+  margin-right: 16px;
+}
+
+#control {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 4px 0px 8px;
+}
+
+#battery {
+  margin-right: 8px;
+}
+
+#network {
+  margin: 0px 8px;
+}
+
+#bluetooth {
+  margin: 0px 8px;
+}
+
+#pulseaudio {
+  margin: 0px 8px;
+}
+#backlight {
+  margin: 0px 8px;
+  margin-right: 0;
+}
+
+#clock {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 8px 0px 4px;
+}
+
+#custom-notification {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 8px 0px 4px;
+}

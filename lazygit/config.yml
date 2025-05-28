@@ -1,0 +1,30 @@
+os:
+  editCommand: "floaterm"
+
+gui:
+  sidePanelWidth: 0.2 # gives you more space to show things side-by-side
+
+git:
+  overrideGpg: true
+  paging:
+    colorArg: never
+    pager: ydiff -p cat -s --wrap --width={{columnWidth}}
+
+customCommands:
+  - key: "<c-f>" # You can change this to your preferred key binding
+    command: "git push --no-verify --force"
+    context: "localBranches"
+    prompts:
+      - type: "confirm"
+        title: "Are you sure you want to force push? (Enter/Esc)"
+    loadingText: "Force pushing..."
+    description: "Force push without running hooks (with confirmation)"
+
+  - key: "<c-u>"
+    context: "localBranches"
+    command: "git push --set-upstream --no-verify origin {{ .SelectedLocalBranch.Name }}"
+    prompts:
+      - type: "confirm"
+        title: "Are you sure you want to push upstream to {{.SelectedRemote.Name}} from {{ .SelectedLocalBranch.Name }}? (Enter/Esc)"
+    loadingText: "Setting up and pushing upstream..."
+    description: "Set up upstream branch and push"
