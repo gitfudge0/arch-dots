@@ -16,13 +16,14 @@ FILEPATH="$HOME/Pictures/Screenshots/$FILENAME"
 
 case $SELECTED in
 "📱 Fullscreen")
-  grim "$FILEPATH"
-  notify-send "Screenshot" "Fullscreen saved to $FILENAME" -i "$FILEPATH"
+  sleep 1
+  grim - | tee "$FILEPATH" | wl-copy
+  notify-send "Screenshot" "Fullscreen copied to clipboard and saved to $FILENAME" -i "$FILEPATH"
   ;;
 "🖱️ Selection")
-  grim -g "$(slurp)" "$FILEPATH"
+  grim -g "$(slurp)" - | tee "$FILEPATH" | wl-copy
   if [ $? -eq 0 ]; then
-    notify-send "Screenshot" "Selection saved to $FILENAME" -i "$FILEPATH"
+    notify-send "Screenshot" "Selection copied to clipboard and saved to $FILENAME" -i "$FILEPATH"
   fi
   ;;
 "🪟 Window")
@@ -37,10 +38,11 @@ case $SELECTED in
   W=$(echo "$WINDOW_INFO" | jq -r '.size[0]')
   H=$(echo "$WINDOW_INFO" | jq -r '.size[1]')
 
-  grim -g "${X},${Y} ${W}x${H}" "$FILEPATH"
-  notify-send "Screenshot" "Window saved to $FILENAME" -i "$FILEPATH"
+  grim -g "${X},${Y} ${W}x${H}" - | tee "$FILEPATH" | wl-copy
+  notify-send "Screenshot" "Window copied to clipboard and saved to $FILENAME" -i "$FILEPATH"
   ;;
 "📝 Fullscreen + Edit")
+  sleep 1
   grim - | swappy -f -
   ;;
 "✏️ Selection + Edit")
