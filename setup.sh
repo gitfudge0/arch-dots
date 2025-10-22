@@ -129,12 +129,130 @@ install_tools() {
     install_package "jq"
   fi
 
-  # Additional dependencies
-  if ! check_tool "hyprpaper" "hyprpaper"; then
-    install_package "hyprpaper"
-  fi
+   # Additional dependencies
+   if ! check_tool "hyprpaper" "hyprpaper"; then
+     install_package "hyprpaper"
+   fi
 
-  # Install yay if not present (needed for AUR packages)
+   if ! check_tool "swayidle" "swayidle"; then
+     install_package "swayidle"
+   fi
+
+   if ! check_tool "swayosd-client" "swayosd"; then
+     install_package "swayosd"
+   fi
+
+   if ! check_tool "brightnessctl" "brightnessctl"; then
+     install_package "brightnessctl"
+   fi
+
+   if ! check_tool "socat" "socat"; then
+     install_package "socat"
+   fi
+
+   if ! check_tool "sway-audio-idle-inhibit" "sway-audio-idle-inhibit"; then
+     install_package "sway-audio-idle-inhibit" true
+   fi
+
+   if ! check_tool "playerctl" "playerctl"; then
+     install_package "playerctl"
+   fi
+
+   if ! check_tool "hyprshot" "hyprshot"; then
+      install_package "hyprshot" true
+    fi
+
+    if ! check_tool "flameshot" "flameshot"; then
+      install_package "flameshot" true
+    fi
+
+    # Development tools
+    if ! check_tool "rustup" "rustup"; then
+      install_package "rustup"
+    fi
+
+    if ! check_tool "go" "go"; then
+      install_package "go"
+    fi
+
+    if ! check_tool "deno" "deno"; then
+      install_package "deno"
+    fi
+
+    if ! check_tool "node" "nodejs"; then
+      install_package "nodejs"
+    fi
+
+    if ! check_tool "ruby-install" "ruby-install"; then
+      install_package "ruby-install"
+    fi
+
+    # Virtualization & Containers
+    if ! check_tool "docker" "docker"; then
+      install_package "docker"
+    fi
+
+    if ! check_tool "docker-compose" "docker-compose"; then
+      install_package "docker-compose"
+    fi
+
+    if ! check_tool "qemu-system-x86_64" "qemu-full"; then
+      install_package "qemu-full"
+    fi
+
+    # System utilities
+    if ! check_tool "asusctl" "asusctl"; then
+      install_package "asusctl" true
+    fi
+
+    if ! check_tool "nbfc" "nbfc"; then
+      install_package "nbfc" true
+    fi
+
+    if ! check_tool "blueman-manager" "blueman"; then
+      install_package "blueman"
+    fi
+
+    # Browser
+    if ! check_tool "zen" "zen-browser-bin"; then
+      install_package "zen-browser-bin" true
+    fi
+
+    # Fonts
+    log_info "Installing fonts..."
+    install_package "noto-fonts"
+    install_package "noto-fonts-cjk"
+    install_package "noto-fonts-emoji"
+    install_package "ttf-fira-code"
+    install_package "ttf-firacode-nerd"
+    install_package "ttf-dejavu"
+
+    # Shell enhancements
+    if ! check_tool "zsh" "zsh"; then
+      install_package "zsh"
+    fi
+
+    if ! check_tool "starship" "starship"; then
+      install_package "starship"
+    fi
+
+    if ! check_tool "fzf" "fzf"; then
+      install_package "fzf"
+    fi
+
+    if ! check_tool "rg" "ripgrep"; then
+      install_package "ripgrep"
+    fi
+
+    if ! check_tool "eza" "eza"; then
+      install_package "eza"
+    fi
+
+    if ! check_tool "bat" "bat"; then
+      install_package "bat"
+    fi
+
+   # Install yay if not present (needed for AUR packages)
   if ! command -v yay &>/dev/null; then
     log_info "Installing yay AUR helper..."
     sudo pacman -S --noconfirm git base-devel
@@ -162,12 +280,12 @@ setup_configs() {
     log_info "Creating backup of existing configs at $backup_dir"
     mkdir -p "$backup_dir"
 
-    for app in hypr waybar wofi swaync lazygit ghostty kitty; do
-      if [[ -d "$config_dir/$app" ]]; then
-        log_info "Backing up existing $app config"
-        cp -r "$config_dir/$app" "$backup_dir/"
-      fi
-    done
+   for app in hypr waybar wofi swaync lazygit ghostty kitty gtk zsh; do
+       if [[ -d "$config_dir/$app" ]]; then
+         log_info "Backing up existing $app config"
+         cp -r "$config_dir/$app" "$backup_dir/"
+       fi
+     done
   fi
 
   # Clone repository to temp directory
@@ -183,21 +301,43 @@ setup_configs() {
   # Create config directory
   mkdir -p "$config_dir"
 
-  # Copy each config directory
-  for app in hypr waybar wofi swaync lazygit ghostty kitty; do
-    if [[ -d "$temp_dir/$app" ]]; then
-      log_info "Setting up $app configuration..."
-      cp -r "$temp_dir/$app" "$config_dir/"
-      log_success "$app configuration copied"
-    else
-      log_warning "$app configuration not found in repository"
-    fi
-  done
+   # Copy each config directory
+   for app in hypr waybar wofi swaync lazygit ghostty kitty gtk zsh; do
+     if [[ -d "$temp_dir/$app" ]]; then
+       log_info "Setting up $app configuration..."
+       cp -r "$temp_dir/$app" "$config_dir/"
+       log_success "$app configuration copied"
+     else
+       log_warning "$app configuration not found in repository"
+     fi
+   done
 
   # Make scripts executable
   if [[ -d "$config_dir/hypr/scripts" ]]; then
     log_info "Making hypr scripts executable..."
     chmod +x "$config_dir/hypr/scripts"/*.sh 2>/dev/null
+  fi
+
+  # Setup GTK directories structure
+  log_info "Setting up GTK configuration directories..."
+  mkdir -p "$config_dir/gtk-3.0" "$config_dir/gtk-4.0"
+
+  # Copy GTK-3.0 configs if they exist in the gtk folder
+  if [[ -d "$config_dir/gtk/gtk-3.0" ]]; then
+    cp "$config_dir/gtk/gtk-3.0"/* "$config_dir/gtk-3.0/" 2>/dev/null
+    log_success "GTK-3.0 configuration installed"
+  fi
+
+  # Copy GTK-4.0 configs if they exist in the gtk folder
+  if [[ -d "$config_dir/gtk/gtk-4.0" ]]; then
+    cp "$config_dir/gtk/gtk-4.0"/* "$config_dir/gtk-4.0/" 2>/dev/null
+    log_success "GTK-4.0 configuration installed"
+  fi
+
+  # Copy root-level starship.toml if it exists
+  if [[ -f "$temp_dir/starship.toml" ]]; then
+    cp "$temp_dir/starship.toml" "$config_dir/"
+    log_success "Starship configuration installed"
   fi
 
   # Set proper permissions
@@ -211,90 +351,118 @@ setup_configs() {
 
 # Enable necessary services
 enable_services() {
-  log_info "Enabling system services..."
+   log_info "Enabling system services..."
 
-  # Enable and start services if not already running
-  services=("bluetooth" "NetworkManager")
+   # Enable and start services if not already running
+   services=("bluetooth" "NetworkManager" "docker")
 
-  for service in "${services[@]}"; do
-    if systemctl is-enabled "$service" &>/dev/null; then
-      log_warning "$service is already enabled"
-    else
-      log_info "Enabling $service"
-      sudo systemctl enable "$service"
-    fi
+   for service in "${services[@]}"; do
+     if systemctl is-enabled "$service" &>/dev/null; then
+       log_warning "$service is already enabled"
+     else
+       log_info "Enabling $service"
+       sudo systemctl enable "$service"
+     fi
 
-    if systemctl is-active "$service" &>/dev/null; then
-      log_warning "$service is already running"
-    else
-      log_info "Starting $service"
-      sudo systemctl start "$service"
-    fi
-  done
+     if systemctl is-active "$service" &>/dev/null; then
+       log_warning "$service is already running"
+     else
+       log_info "Starting $service"
+       sudo systemctl start "$service"
+     fi
+   done
 
-  log_success "System services configured"
+   # Add current user to docker group
+   if ! groups | grep -q docker; then
+     log_info "Adding user to docker group..."
+     sudo usermod -aG docker "$USER"
+     log_warning "Please log out and log back in for docker group membership to take effect"
+   fi
+
+   log_success "System services configured"
 }
 
 # Print next steps
 print_next_steps() {
-  echo ""
-  log_success "🎉 Setup completed successfully!"
-  echo ""
-  echo -e "${BLUE}📋 Next Steps:${NC}"
-  echo -e "${YELLOW}1.${NC} Log out and log back in, or reboot your system"
-  echo -e "${YELLOW}2.${NC} Select Hyprland as your session from your display manager"
-  echo -e "${YELLOW}3.${NC} Configure wallpapers in ~/.config/hypr/wallpapers/"
-  echo -e "${YELLOW}4.${NC} Customize waybar themes in ~/.config/waybar/"
-  echo -e "${YELLOW}5.${NC} Set up your terminal preferences in ~/.config/kitty/ and ~/.config/ghostty/"
-  echo ""
-  echo -e "${BLUE}🔧 Useful Commands:${NC}"
-  echo -e "${YELLOW}•${NC} Super + Return: Open terminal"
-  echo -e "${YELLOW}•${NC} Super + B: Open browser (zen)"
-  echo -e "${YELLOW}•${NC} Super + R: Open application launcher (wofi)"
-  echo -e "${YELLOW}•${NC} Super + X: Open power options"
-  echo -e "${YELLOW}•${NC} Super + Shift + S: Open screenshot menu (grim + slurp + swappy)"
-  echo -e "${YELLOW}•${NC} Super + Q: Close window"
-  echo ""
-  echo -e "${BLUE}📁 Backup Location:${NC}"
-  echo -e "Your original configs were backed up to: ${backup_dir:-N/A}"
-  echo ""
-  echo -e "${GREEN}✨ Enjoy your new Arch Linux setup!${NC}"
+   echo ""
+   log_success "🎉 Setup completed successfully!"
+   echo ""
+   echo -e "${BLUE}📋 Next Steps:${NC}"
+   echo -e "${YELLOW}1.${NC} Log out and log back in, or reboot your system"
+   echo -e "${YELLOW}2.${NC} Select Hyprland as your session from your display manager"
+   echo -e "${YELLOW}3.${NC} Configure wallpapers in ~/.config/hypr/wallpapers/"
+   echo -e "${YELLOW}4.${NC} Customize waybar themes in ~/.config/waybar/"
+   echo -e "${YELLOW}5.${NC} Set up your terminal preferences in ~/.config/kitty/ and ~/.config/ghostty/"
+   echo -e "${YELLOW}6.${NC} Install rust-analyzer: rustup component add rust-analyzer"
+   echo -e "${YELLOW}7.${NC} Configure default shell: chsh -s /bin/zsh"
+   echo -e "${YELLOW}8.${NC} Install docker-desktop from GUI or: yay -S docker-desktop"
+   echo ""
+   echo -e "${BLUE}🔧 Useful Commands:${NC}"
+   echo -e "${YELLOW}•${NC} Super + Return: Open terminal"
+   echo -e "${YELLOW}•${NC} Super + B: Open browser (zen)"
+   echo -e "${YELLOW}•${NC} Super + R: Open application launcher (wofi)"
+   echo -e "${YELLOW}•${NC} Super + X: Open power options"
+   echo -e "${YELLOW}•${NC} Super + Shift + S: Open screenshot menu (grim + slurp + swappy)"
+   echo -e "${YELLOW}•${NC} Super + Shift + F: Flameshot GUI"
+   echo ""
+   echo -e "${BLUE}🛠️ Development Tools:${NC}"
+   echo -e "${YELLOW}•${NC} Rust: rustup, cargo, rust-analyzer"
+   echo -e "${YELLOW}•${NC} Go, Deno, Node.js: Ready to use"
+   echo -e "${YELLOW}•${NC} Docker: Configure with 'docker ps' after login"
+   echo -e "${YELLOW}•${NC} QEMU: For virtualization"
+   echo ""
+   echo -e "${BLUE}⚙️ System Tools:${NC}"
+   echo -e "${YELLOW}•${NC} asusctl: ASUS device control"
+   echo -e "${YELLOW}•${NC} nbfc: Notebook fan control"
+   echo -e "${YELLOW}•${NC} blueman: Bluetooth management GUI"
+   echo -e "${YELLOW}•${NC} starship: Prompt customization via ~/.config/starship.toml"
+   echo ""
+   echo -e "${BLUE}📁 Backup Location:${NC}"
+   echo -e "Your original configs were backed up to: ${backup_dir:-N/A}"
+   echo ""
+   echo -e "${GREEN}✨ Enjoy your new Arch Linux setup!${NC}"
 }
 
 # Ask for user confirmation
 ask_permission() {
-  echo -e "${YELLOW}This script will:${NC}"
-  echo -e "${YELLOW}•${NC} Install Hyprland and related packages (hyprland, waybar, wofi, swaync, etc.)"
-  echo -e "${YELLOW}•${NC} Install terminal emulators (kitty, ghostty)"
-  echo -e "${YELLOW}•${NC} Install development tools (lazygit)"
-  echo -e "${YELLOW}•${NC} Install screenshot tools (grim, slurp, swappy)"
-  echo -e "${YELLOW}•${NC} Install yay AUR helper if not present"
-  echo -e "${YELLOW}•${NC} Backup existing configs and replace them with gitfudge's dotfiles"
-  echo -e "${YELLOW}•${NC} Enable system services (bluetooth, NetworkManager)"
-  echo ""
-  echo -e "${RED}WARNING:${NC} Existing configurations will be backed up but replaced!"
-  echo ""
+   echo -e "${YELLOW}This script will:${NC}"
+   echo -e "${YELLOW}•${NC} Install Hyprland and related packages (hyprland, waybar, wofi, swaync, etc.)"
+   echo -e "${YELLOW}•${NC} Install terminal emulators (kitty, ghostty)"
+   echo -e "${YELLOW}•${NC} Install development tools (lazygit, rustup, go, deno, nodejs, ruby-install, rust-analyzer)"
+   echo -e "${YELLOW}•${NC} Install screenshot tools (grim, slurp, swappy, flameshot)"
+   echo -e "${YELLOW}•${NC} Install virtualization tools (docker, docker-compose, qemu-full)"
+   echo -e "${YELLOW}•${NC} Install system utilities (asusctl, nbfc, blueman)"
+   echo -e "${YELLOW}•${NC} Install zen-browser-bin"
+   echo -e "${YELLOW}•${NC} Install fonts (Noto, Fira Code, Nerd Fonts, DejaVu)"
+   echo -e "${YELLOW}•${NC} Install shell enhancements (zsh, starship, fzf, ripgrep, eza, bat)"
+   echo -e "${YELLOW}•${NC} Install yay AUR helper if not present"
+   echo -e "${YELLOW}•${NC} Backup existing configs and replace them with gitfudge's dotfiles"
+   echo -e "${YELLOW}•${NC} Enable system services (bluetooth, NetworkManager, docker)"
+   echo -e "${YELLOW}•${NC} Configure docker for current user"
+   echo ""
+   echo -e "${RED}WARNING:${NC} Existing configurations will be backed up but replaced!"
+   echo ""
 
-  while true; do
-    read -p "Do you want to continue? (y/N): " yn
-    case $yn in
-    [Yy]*)
-      log_info "Starting installation..."
-      break
-      ;;
-    [Nn]*)
-      log_info "Installation cancelled by user"
-      exit 0
-      ;;
-    "")
-      log_info "Installation cancelled by user"
-      exit 0
-      ;;
-    *)
-      echo "Please answer yes (y) or no (n)."
-      ;;
-    esac
-  done
+   while true; do
+     read -p "Do you want to continue? (y/N): " yn
+     case $yn in
+     [Yy]*)
+       log_info "Starting installation..."
+       break
+       ;;
+     [Nn]*)
+       log_info "Installation cancelled by user"
+       exit 0
+       ;;
+     "")
+       log_info "Installation cancelled by user"
+       exit 0
+       ;;
+     *)
+       echo "Please answer yes (y) or no (n)."
+       ;;
+     esac
+   done
 }
 
 # Main execution

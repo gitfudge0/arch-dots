@@ -1,0 +1,167 @@
+/* Tokyonight Moon for GTK4/libadwaita (variables-first)
+   Scope: ~/.config/gtk-4.0/gtk.css
+   Notes:
+   - Prioritizes libadwaita named colors; avoids brittle deep selectors
+   - Minimal fallbacks at bottom for broad compatibility
+*/
+
+/* Core palette (Tokyonight Moon) */
+@define-color tn_bg0 #1e2030;   /* window background */
+@define-color tn_bg1 #222436;   /* view background */
+@define-color tn_bg2 #2f334d;   /* surfaces/cards */
+@define-color tn_bg3 #191b29;   /* headerbar/darker */
+@define-color tn_fg  #c8d3f5;   /* primary text */
+@define-color tn_fg_dim #a9b8e8;/* secondary text */
+@define-color tn_muted #7f85a3; /* tertiary */
+@define-color tn_accent #82aaff;/* blue accent */
+@define-color tn_link  #86e1fc; /* link/cyan */
+@define-color tn_sel   #3b4261; /* selection bg (low-contrast) */
+
+/* Semantic state colors */
+@define-color tn_success #c3e88d;
+@define-color tn_warning #ffc777;
+@define-color tn_error   #ff757f; /* also destructive */
+
+/* Libadwaita named color overrides */
+@define-color accent_bg_color       @tn_accent;
+@define-color accent_fg_color       #0b1221; /* dark text on light accent if used */
+@define-color accent_color          @tn_accent;
+
+@define-color destructive_bg_color  @tn_error;
+@define-color destructive_fg_color  #0b1221;
+@define-color destructive_color     @tn_error;
+
+@define-color success_bg_color      @tn_success;
+@define-color success_fg_color      #0b1221;
+@define-color success_color         @tn_success;
+
+@define-color warning_bg_color      @tn_warning;
+@define-color warning_fg_color      #0b1221;
+@define-color warning_color         @tn_warning;
+
+@define-color error_bg_color        @tn_error;
+@define-color error_fg_color        #0b1221;
+@define-color error_color           @tn_error;
+
+@define-color window_bg_color       @tn_bg0;
+@define-color window_fg_color       @tn_fg;
+
+@define-color view_bg_color         @tn_bg1;
+@define-color view_fg_color         @tn_fg;
+
+@define-color headerbar_bg_color           @tn_bg3;
+@define-color headerbar_fg_color           @tn_fg;
+@define-color headerbar_backdrop_color     @tn_bg0;
+@define-color headerbar_shade_color        alpha(#000000, 0.25);
+@define-color headerbar_darker_shade_color alpha(#000000, 0.30);
+@define-color headerbar_border_color       alpha(@tn_fg, 0.08);
+
+@define-color sidebar_bg_color      alpha(@tn_bg0, 0.96);
+@define-color sidebar_fg_color      @tn_fg;
+@define-color sidebar_backdrop_color alpha(@tn_bg0, 0.96);
+@define-color sidebar_shade_color   alpha(#000000, 0.25);
+@define-color sidebar_border_color  alpha(@tn_fg, 0.08);
+
+@define-color secondary_sidebar_bg_color @tn_bg1;
+@define-color secondary_sidebar_fg_color @tn_fg;
+@define-color secondary_sidebar_backdrop_color @tn_bg0;
+@define-color secondary_sidebar_shade_color alpha(#000000, 0.25);
+@define-color secondary_sidebar_border_color alpha(@tn_fg, 0.10);
+
+@define-color card_bg_color         @tn_bg2;
+@define-color card_fg_color         @tn_fg;
+@define-color card_shade_color      alpha(@tn_fg, 0.08);
+
+@define-color dialog_bg_color       alpha(@tn_bg1, 0.96);
+@define-color dialog_fg_color       @tn_fg;
+
+@define-color popover_bg_color      alpha(@tn_bg0, 0.96);
+@define-color popover_fg_color      @tn_fg;
+@define-color popover_shade_color   alpha(#000000, 0.25);
+
+@define-color thumbnail_bg_color    mix(@tn_bg1, @tn_bg0, 0.5);
+@define-color thumbnail_fg_color    @tn_fg;
+
+@define-color shade_color           alpha(@tn_fg, 0.12);
+@define-color scrollbar_outline_color alpha(@tn_fg, 0.12);
+
+/* Links and selections */
+link, button.link { color: @tn_link; }
+link:hover, button.link:hover { color: lighten(@tn_link, 8%); }
+.view:selected, label > selection, textview > text selection, entry > text > selection {
+  background-color: @tn_accent;
+  color: #0b1221;
+}
+
+/* Optional: titlebar subtle gradient off; reduce window separator prominence */
+.titlebar, headerbar { box-shadow: none; }
+.titlebar:not(headerbar) > separator { background-color: transparent; }
+
+/* Fallbacks for generic containers to ensure coverage without deep selectors */
+/* .background { color: @tn_fg; background-color: @tn_bg0; } */
+/* iconview, .view, textview, .card { color: @tn_fg; background-color: @tn_bg1; } */
+
+/* Buttons: lean onto accent; keep neutral surface for flat buttons */
+button, .image-button, .text-button {
+  color: desaturate(@tn_fg, 10%);
+  background-color: mix(@tn_bg2, #000000, 0.10);
+  border-color: alpha(#000000, 0.15);
+}
+button:hover { color: @tn_fg; background-color: mix(@tn_bg2, #ffffff, 0.05); }
+button:active, button:checked { color: #0b1221; background-color: @tn_accent; }
+button:disabled { color: alpha(@tn_fg, 0.35); background-color: alpha(@tn_bg2, 0.55); }
+
+/* OSD/Toast pop surfaces */
+.osd, toast { color: lighten(@tn_fg, 3%); background-color: alpha(@tn_bg0, 0.96); }
+
+/* Rubberband/select regions */
+rubberband { border: 1px solid darken(@tn_accent, 10%); background-color: alpha(@tn_accent, 0.25); }
+
+/* Spinner and icons disabled tint */
+spinner:disabled, arrow:disabled, check:disabled, radio:disabled { -gtk-icon-filter: opacity(0.5); }
+
+/* Custom: network button pill styling */
+#network-button,
+button#network-button,
+listboxrow#network-button {
+  color: @tn_fg;
+  background-color: mix(@card_bg_color, #000000, 0.06);
+  border: 1px solid alpha(@tn_fg, 0.10);
+  border-radius: 9999px;
+  padding: 6px 10px;
+}
+
+#network-button:hover,
+button#network-button:hover,
+listboxrow#network-button:hover {
+  background-color: mix(@card_bg_color, #ffffff, 0.06);
+  border-color: alpha(@tn_fg, 0.16);
+  color: @tn_fg;
+}
+
+#network-button:active,
+#network-button:checked,
+#network-button:selected,
+button#network-button:active,
+button#network-button:checked,
+listboxrow#network-button:active,
+listboxrow#network-button:selected {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+  border-color: alpha(@accent_bg_color, 0.70);
+}
+
+#network-button:disabled,
+button#network-button:disabled,
+listboxrow#network-button:disabled {
+  color: alpha(@tn_fg, 0.40);
+  background-color: alpha(@card_bg_color, 0.65);
+  border-color: alpha(@tn_fg, 0.08);
+}
+
+/* Ensure icon/label inside follows state color */
+#network-button image,
+#network-button icon,
+#network-button label {
+  color: inherit;
+}

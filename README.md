@@ -8,10 +8,16 @@ A complete Hyprland config that taught me a lot about desktop environments, insp
 - **Status Bar**: Waybar with custom styling
 - **Application Launcher**: Wofi with custom themes
 - **Notifications**: SwayNC notification daemon
-- **Terminal Emulators**: Kitty and Ghostty
-- **Screenshot Tool**: Grim, Slurp, Swappy, and jq for advanced screenshot functionality
+- **Terminal Emulators**: Kitty and Ghostty with Zsh shell
+- **Screenshot Tools**: Grim, Slurp, Swappy, Flameshot, and jq
 - **Wallpaper Manager**: Hyprpaper with custom wallpapers
-- **Custom Scripts**: Power menu, lock screen, wallpaper switcher, and fan control
+- **Development Tools**: Rust (rustup), Go, Deno, Node.js, Ruby-install, Lazygit
+- **Virtualization**: Docker, Docker Compose, QEMU
+- **System Tools**: asusctl, nbfc (fan control), Blueman (Bluetooth)
+- **Browser**: Zen Browser
+- **Shell Enhancements**: Zsh with Starship prompt, fzf, ripgrep, eza, bat
+- **Fonts**: Noto Sans, Fira Code, Nerd Fonts, DejaVu
+- **Custom Scripts**: Power menu, lock screen, wallpaper switcher, workspace listener, fan control
 
 ## Installation
 
@@ -53,12 +59,21 @@ chmod +x setup.sh
 
 The installation script will:
 
-- Verify you're running Arch Linux, lol
-- Install required packages (hyprland, waybar, wofi, swaync, kitty, ghostty, lazygit, grim, slurp, swappy, jq, hyprpaper)
+- Verify you're running Arch Linux
+- Install required packages:
+  - **WM & UI**: Hyprland, Waybar, Wofi, SwayNC
+  - **Terminals**: Kitty, Ghostty
+  - **Development**: Rustup, Go, Deno, Node.js, Ruby-install, Lazygit
+  - **Screenshots**: Grim, Slurp, Swappy, Flameshot
+  - **Virtualization**: Docker, Docker Compose, QEMU
+  - **System**: asusctl, nbfc, Blueman, Zen Browser
+  - **Shell**: Zsh, Starship, fzf, ripgrep, eza, bat
+  - **Fonts**: Noto Sans, Noto CJK, Noto Emoji, Fira Code, DejaVu, Nerd Fonts
 - Install AUR packages using yay (installs yay if not present)
 - Backup your existing configurations to `~/.config-backup-<timestamp>`
 - Download and install all configuration files
-- Enable necessary system services (bluetooth, NetworkManager)
+- Enable necessary system services (bluetooth, NetworkManager, docker)
+- Configure docker for current user
 - Set proper file permissions
 
 ## Key Bindings
@@ -66,12 +81,61 @@ The installation script will:
 These are some to get you started. For a full list, check out the hyprland config.
 
 - **Super + Return**: Open terminal
-- **Super + B**: zed-browser(make sure you install this)
+- **Super + B**: Open Zen Browser
 - **Super + R**: Open application launcher (wofi)
-- **Super + X**: Open wofi with power options
-- **Super + Shift + S**: Open screenshot wofi menu
+- **Super + X**: Open power options menu
+- **Super + Shift + S**: Open screenshot menu (grim + slurp + swappy)
+- **Super + Shift + F**: Open Flameshot GUI
 - **Super + Q**: Close window
+
+## Development Tools
+
+After installation, configure development tools:
+
+```bash
+# Install Rust tools
+rustup component add rust-analyzer
+
+# Verify Go installation
+go version
+
+# Verify Node.js
+node --version
+npm --version
+
+# Docker (after login)
+docker ps
+
+# Set default shell
+chsh -s /bin/zsh
+```
+
+## Shell Configuration
+
+The Zsh configuration includes:
+
+- **Theme**: Robbyrussell (via oh-my-zsh)
+- **Prompt**: Starship with custom formatting
+- **Plugins**: git, z, fzf, syntax highlighting, autosuggestions
+- **Aliases**:
+  - `ls` → `eza -lha` (better listing)
+  - `cat` → `bat` (syntax highlighting)
+  - `grep` → `rg` (ripgrep)
+  - `find` → `fd`
+
+Customize the Starship prompt by editing `~/.config/starship.toml`.
+
+## System Utils
+
+- **asusctl**: ASUS device control (OLED brightness, etc.)
+- **nbfc**: Notebook fan control - edit `/etc/nbfc/profiles` for your laptop
+- **Blueman**: GUI for Bluetooth device management
+
+## GTK Configuration
+
+GTK theme is set to Adwaita Dark with Papirus icons. Edit `~/.config/gtk/settings.ini` to change theme.
 
 ---
 
 **Note**: This configuration is designed specifically for Arch Linux with Hyprland. Backup your existing configurations before installation.
+

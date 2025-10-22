@@ -1,0 +1,110 @@
+/* GTK3 Custom Theming - Tokyonight Moon
+   Scope: ~/.config/gtk-3.0/gtk.css
+*/
+
+@define-color tn_bg0 #1e2030;
+@define-color tn_bg1 #222436;
+@define-color tn_bg2 #2f334d;
+@define-color tn_bg3 #191b29;
+@define-color tn_fg  #c8d3f5;
+@define-color tn_fg_dim #a9b8e8;
+@define-color tn_muted #7f85a3;
+@define-color tn_accent #82aaff;
+@define-color tn_link  #86e1fc;
+
+@define-color tn_success #c3e88d;
+@define-color tn_warning #ffc777;
+@define-color tn_error   #ff757f;
+
+* {
+  color: @tn_fg;
+  background-color: @tn_bg0;
+}
+
+window, .background {
+  color: @tn_fg;
+  background-color: @tn_bg0;
+}
+
+textview, .view, iconview {
+  color: @tn_fg;
+  background-color: @tn_bg1;
+}
+
+entry, spinbutton {
+  color: @tn_fg;
+  background-color: @tn_bg2;
+  border-color: alpha(@tn_fg, 0.12);
+}
+
+button {
+  color: @tn_fg;
+  background-color: @tn_bg2;
+  border-color: alpha(@tn_fg, 0.15);
+}
+
+button:hover {
+  background-color: mix(@tn_bg2, #ffffff, 0.05);
+}
+
+button:active, button:checked {
+  color: #0b1221;
+  background-color: @tn_accent;
+}
+
+button:disabled {
+  color: alpha(@tn_fg, 0.35);
+  background-color: alpha(@tn_bg2, 0.55);
+}
+
+header-bar, .titlebar {
+  color: @tn_fg;
+  background-color: @tn_bg3;
+  border-color: alpha(@tn_fg, 0.08);
+}
+
+.sidebar {
+  color: @tn_fg;
+  background-color: alpha(@tn_bg0, 0.96);
+}
+
+.card {
+  color: @tn_fg;
+  background-color: @tn_bg2;
+}
+
+menu, .context-menu, menuitem {
+  color: @tn_fg;
+  background-color: @tn_bg1;
+}
+
+menuitem:hover {
+  background-color: @tn_accent;
+  color: #0b1221;
+}
+
+link, .link {
+  color: @tn_link;
+}
+
+link:visited, .link:visited {
+  color: mix(@tn_link, @tn_accent, 0.5);
+}
+
+selection, .view:selected {
+  background-color: @tn_accent;
+  color: #0b1221;
+}
+
+label.success {
+  color: @tn_success;
+}
+
+label.warning {
+  color: @tn_warning;
+}
+
+label.error {
+  color: @tn_error;
+}
+
