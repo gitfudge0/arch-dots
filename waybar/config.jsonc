@@ -1,14 +1,17 @@
-// -*- mode: jsonc -*-
 {
-  //"layer": "top", // Waybar at top layer
   "height": 40,
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
   "modules-right": [
+    // "custom/hyprwhspr", // Optional: uncomment if hyprwhspr is installed
     "tray",
     "group/hw",
+    "group/connectivity",
     "group/control",
     "clock",
-    "custom/notification",
+    "group/system"
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -22,43 +25,61 @@
       "6": "<b>6</b>",
       "7": "<b>7</b>",
       "8": "<b>8</b>",
-      "9": "<b>9</b>",
-    },
+      "9": "<b>9</b>"
+    }
   },
   "hyprland/window": {},
   "tray": {
     "icon-size": 17,
-    "spacing": 8,
+    "spacing": 8
   },
+  // Hardware monitoring group
   "group/hw": {
     "orientation": "horizontal",
-    "modules": ["cpu", "memory", "temperature"],
+    "modules": [
+      "disk",
+      "cpu",
+      "memory",
+      "temperature",
+      "battery"
+    ]
+  },
+  "disk": {
+    "format": "<span color='#a6e3a1'>󰋊</span> {percentage_used}%",
+    "interval": 30,
+    "path": "/",
+    "tooltip-format": "Disk Usage: {used} / {total}\nFree: {free} ({percentage_free}%)",
+    "on-click": "thunar"
   },
   "cpu": {
     "format": "<span color='#b2ccd6'>󰍛</span> {usage}%",
     "interval": 2,
-    "on-click": "kitty btop",
+    "on-click": "kitty btop"
   },
   "memory": {
     "format": "<span color='#c792ea'>󰘚</span> {used:.2g}GB",
     "interval": 2,
-    "on-click": "kitty btop",
+    "on-click": "kitty btop"
   },
-  "group/control": {
-    "orientation": "horizontal",
-    "modules": ["battery", "network", "bluetooth", "pulseaudio", "backlight"],
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "<span color='#ffcb6b'>󱄄</span> {temperatureC}°C",
+    "format-critical": "<span color='#f38ba8'>󱄄</span> {temperatureC}°C"
   },
   "battery": {
-    // "states": {
-    // "good": 95,
-    //  "warning": 30,
-    // "critical": 15,
-    // },
     "format": "<span color='#c3e88d'>{icon}</span> {capacity}%",
     "format-charging": "<span color='#c3e88d'>󱐋</span> {capacity}%",
-    "format-plugged": "<span color='#c3e88d'></span> {capacity}%",
+    "format-plugged": "<span color='#c3e88d'></span> {capacity}%",
     "tooltip-format": "{time} left",
-    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂁", "󰁹"],
+    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂁", "󰁹"]
+  },
+  // Connectivity group
+  "group/connectivity": {
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "bluetooth"
+    ]
   },
   "network": {
     "format-ethernet": "<span color='#89ddff'>󰈀</span> {bandwidthDownBytes:=}",
@@ -67,13 +88,28 @@
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "interval": 2,
     "tooltip-format": "{essid}",
-    "on-click": "nm-applet",
+    "on-click": "nmgui"
   },
   "bluetooth": {
-    "format": "<span color='#82aaff'></span> {status}",
-    "format-connected-battery": "<span color='#82aaff'></span> {device_battery_percentage}%",
-    "tooltip-format": "{device_alias} {status}",
-    "on-click": "blueman-manager",
+    "format": "<span color='#82aaff'>󰂯</span> {status}",
+    "format-on": "<span color='#82aaff'>󰂯</span> on",
+    "format-off": "<span color='#82aaff'>󰂲</span> off",
+    "format-disabled": "<span color='#82aaff'>󰂲</span>",
+    "format-connected": "<span color='#82aaff'>󰂱</span> {num_connections}",
+    "format-connected-battery": "<span color='#82aaff'>󰂱</span> {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
+    "on-click": "blueman-manager"
+  },
+  // Media controls group
+  "group/control": {
+    "orientation": "horizontal",
+    "modules": [
+      "pulseaudio",
+      "backlight"
+    ]
   },
   "pulseaudio": {
     "format": "<span color='#f78c6c'>{icon}</span> {volume}%",
@@ -84,37 +120,41 @@
       "headphone": "󰋋",
       "phone": "󰏲",
       "portable": "󰏲",
-      "default": ["󰕿", "󰖀", "󰕾"],
+      "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "pavucontrol",
+    "on-click": "pavucontrol"
   },
   "backlight": {
     "device": "intel_backlight",
     "format": "<span color='#ffcb6b'>☀</span> {percent}%",
-    "tooltip": false,
+    "tooltip": false
   },
-  "hyprland/language": {
-    "format": "<span color='#c792ea'></span> {shortDescription} ",
-    "keyboard-name": "at-translated-set-2-keyboard",
-    "min-length": 5,
-  },
+  // Clock
   "clock": {
     "timezone": "Asia/Kolkata",
     "format": "<span color='#ffcb6b'>󰥔</span> {:%a %b %d %R %p}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
-  "temperature": {
-    "critical-threshold": 80,
-    "format": "{icon} {temperatureC}°C",
-    "format-icons": [
-      "<span color='#ffcb6b'></span>",
-      "<span color='#ffcb6b'></span>",
-      "<span color='#ffcb6b'></span>",
-    ],
+  // System utilities group
+  "group/system": {
+    "orientation": "horizontal",
+    "modules": [
+      "idle_inhibitor",
+      "custom/notification",
+      "custom/powermenu"
+    ]
+  },
+  "idle_inhibitor": {
+    "format": "<span color='#fab387'>{icon}</span>",
+    "format-icons": {
+      "activated": "󰷛",
+      "deactivated": "󰶶"
+    },
+    "tooltip-format-activated": "Idle inhibitor: ON\nScreen will not turn off",
+    "tooltip-format-deactivated": "Idle inhibitor: OFF\nNormal power saving"
   },
   "custom/notification": {
     "tooltip": false,
-    "rotate": 0,
     "format": "{icon}",
     "format-icons": {
       "notification": "󰅸",
@@ -124,15 +164,27 @@
       "inhibited-notification": "󰅸",
       "inhibited-none": "󰂜",
       "dnd-inhibited-notification": "󰅸",
-      "dnd-inhibited-none": "󱏨",
+      "dnd-inhibited-none": "󱏨"
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
     "on-click-right": "swaync-client -d -sw",
     "on-click": "swaync-client -t -sw",
-    "escape": true,
-    "margin-left": 10,
-    "margin-right": 5,
+    "escape": true
   },
+  "custom/powermenu": {
+    "format": "<span color='#f38ba8'>⏻</span>",
+    "tooltip-format": "Power Menu",
+    "on-click": "~/.config/hypr/scripts/powermenu.sh"
+  },
+  // Optional: hyprwhspr voice input module
+  // Uncomment if hyprwhspr is installed (run hyprwhspr-setup first)
+  "custom/hyprwhspr": {
+    "format": "{}",
+    "exec": "cat /tmp/hyprwhspr-waybar 2>/dev/null || echo '{\"text\": \"󰍬\", \"class\": \"idle\"}'",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "hyprwhspr-toggle"
+  }
 }

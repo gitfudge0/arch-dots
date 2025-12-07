@@ -11,13 +11,23 @@ A complete Hyprland config that taught me a lot about desktop environments, insp
 - **Terminal Emulators**: Kitty and Ghostty with Zsh shell
 - **Screenshot Tools**: Grim, Slurp, Swappy, Flameshot, and jq
 - **Wallpaper Manager**: Hyprpaper with custom wallpapers
+- **File Manager**: Thunar
+- **Voice Input**: hyprwhspr for voice-to-text in waybar
 - **Development Tools**: Rust (rustup), Go, Deno, Node.js, Ruby-install, Lazygit
 - **Virtualization**: Docker, Docker Compose, QEMU
-- **System Tools**: asusctl, nbfc (fan control), Blueman (Bluetooth)
+- **System Tools**: asusctl, nbfc (fan control), Blueman (Bluetooth), nmgui (Network Manager)
 - **Browser**: Zen Browser
 - **Shell Enhancements**: Zsh with Starship prompt, fzf, ripgrep, eza, bat
 - **Fonts**: Noto Sans, Fira Code, Nerd Fonts, DejaVu
 - **Custom Scripts**: Power menu, lock screen, wallpaper switcher, workspace listener, fan control
+
+## Waybar Features
+
+- **Idle Inhibitor**: Click the caffeine icon to prevent screen sleep
+- **Power Menu**: Quick access to shutdown/reboot/logout options
+- **Disk Usage**: Shows current disk space usage
+- **Bluetooth**: Click to open blueman-manager
+- **Voice Input**: hyprwhspr integration for voice-to-text (requires setup)
 
 ## Installation
 
@@ -66,7 +76,7 @@ The installation script will:
   - **Development**: Rustup, Go, Deno, Node.js, Ruby-install, Lazygit
   - **Screenshots**: Grim, Slurp, Swappy, Flameshot
   - **Virtualization**: Docker, Docker Compose, QEMU
-  - **System**: asusctl, nbfc, Blueman, Zen Browser
+  - **System**: asusctl, nbfc, Blueman, nmgui, Thunar, hyprwhspr, Zen Browser
   - **Shell**: Zsh, Starship, fzf, ripgrep, eza, bat
   - **Fonts**: Noto Sans, Noto CJK, Noto Emoji, Fira Code, DejaVu, Nerd Fonts
 - Install AUR packages using yay (installs yay if not present)
@@ -130,6 +140,18 @@ Customize the Starship prompt by editing `~/.config/starship.toml`.
 - **asusctl**: ASUS device control (OLED brightness, etc.)
 - **nbfc**: Notebook fan control - edit `/etc/nbfc/profiles` for your laptop
 - **Blueman**: GUI for Bluetooth device management
+- **nmgui**: GUI for NetworkManager connections
+- **Thunar**: Lightweight file manager
+
+## Voice Input (hyprwhspr)
+
+After installation, set up voice input:
+
+```bash
+hyprwhspr-setup
+```
+
+This will configure your API key for voice-to-text functionality in waybar.
 
 ## GTK Configuration
 

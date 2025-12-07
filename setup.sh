@@ -158,12 +158,17 @@ install_tools() {
      install_package "playerctl"
    fi
 
-   if ! check_tool "hyprshot" "hyprshot"; then
+    if ! check_tool "hyprshot" "hyprshot"; then
       install_package "hyprshot" true
     fi
 
     if ! check_tool "flameshot" "flameshot"; then
       install_package "flameshot" true
+    fi
+
+    # Voice input for waybar
+    if ! check_tool "hyprwhspr" "hyprwhspr"; then
+      install_package "hyprwhspr" true
     fi
 
     # Development tools
@@ -211,6 +216,14 @@ install_tools() {
 
     if ! check_tool "blueman-manager" "blueman"; then
       install_package "blueman"
+    fi
+
+    if ! check_tool "nmgui" "nmgui-bin"; then
+      install_package "nmgui-bin" true
+    fi
+
+    if ! check_tool "thunar" "thunar"; then
+      install_package "thunar"
     fi
 
     # Browser
@@ -405,6 +418,12 @@ print_next_steps() {
    echo -e "${YELLOW}•${NC} Super + Shift + S: Open screenshot menu (grim + slurp + swappy)"
    echo -e "${YELLOW}•${NC} Super + Shift + F: Flameshot GUI"
    echo ""
+   echo -e "${BLUE}🖥️ Waybar Features:${NC}"
+   echo -e "${YELLOW}•${NC} Idle Inhibitor: Click the caffeine icon to prevent screen sleep"
+   echo -e "${YELLOW}•${NC} Power Menu: Click the power icon to access shutdown/reboot/logout options"
+   echo -e "${YELLOW}•${NC} Disk Usage: Shows current disk space usage"
+   echo -e "${YELLOW}•${NC} Bluetooth: Click to open blueman-manager"
+   echo ""
    echo -e "${BLUE}🛠️ Development Tools:${NC}"
    echo -e "${YELLOW}•${NC} Rust: rustup, cargo, rust-analyzer"
    echo -e "${YELLOW}•${NC} Go, Deno, Node.js: Ready to use"
@@ -415,7 +434,13 @@ print_next_steps() {
    echo -e "${YELLOW}•${NC} asusctl: ASUS device control"
    echo -e "${YELLOW}•${NC} nbfc: Notebook fan control"
    echo -e "${YELLOW}•${NC} blueman: Bluetooth management GUI"
+   echo -e "${YELLOW}•${NC} nmgui: Network manager GUI"
+   echo -e "${YELLOW}•${NC} thunar: File manager"
    echo -e "${YELLOW}•${NC} starship: Prompt customization via ~/.config/starship.toml"
+   echo ""
+   echo -e "${BLUE}🎙️ Voice Input (hyprwhspr):${NC}"
+   echo -e "${YELLOW}•${NC} Setup: hyprwhspr-setup (configure your API key)"
+   echo -e "${YELLOW}•${NC} The hyprwhspr module is available in waybar"
    echo ""
    echo -e "${BLUE}📁 Backup Location:${NC}"
    echo -e "Your original configs were backed up to: ${backup_dir:-N/A}"
@@ -431,7 +456,7 @@ ask_permission() {
    echo -e "${YELLOW}•${NC} Install development tools (lazygit, rustup, go, deno, nodejs, ruby-install, rust-analyzer)"
    echo -e "${YELLOW}•${NC} Install screenshot tools (grim, slurp, swappy, flameshot)"
    echo -e "${YELLOW}•${NC} Install virtualization tools (docker, docker-compose, qemu-full)"
-   echo -e "${YELLOW}•${NC} Install system utilities (asusctl, nbfc, blueman)"
+   echo -e "${YELLOW}•${NC} Install system utilities (asusctl, nbfc, blueman, nmgui, thunar)"
    echo -e "${YELLOW}•${NC} Install zen-browser-bin"
    echo -e "${YELLOW}•${NC} Install fonts (Noto, Fira Code, Nerd Fonts, DejaVu)"
    echo -e "${YELLOW}•${NC} Install shell enhancements (zsh, starship, fzf, ripgrep, eza, bat)"
