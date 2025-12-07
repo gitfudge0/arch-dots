@@ -166,11 +166,10 @@ install_tools() {
       install_package "flameshot" true
     fi
 
-    # Optional: hyprwhspr voice input (AUR)
-    # Uncomment to install voice input support for waybar
-    # if ! check_tool "hyprwhspr" "hyprwhspr"; then
-    #   install_package "hyprwhspr" true
-    # fi
+    # Voice input for waybar
+    if ! check_tool "hyprwhspr" "hyprwhspr"; then
+      install_package "hyprwhspr" true
+    fi
 
     # Development tools
     if ! check_tool "rustup" "rustup"; then
@@ -439,10 +438,9 @@ print_next_steps() {
    echo -e "${YELLOW}•${NC} thunar: File manager"
    echo -e "${YELLOW}•${NC} starship: Prompt customization via ~/.config/starship.toml"
    echo ""
-   echo -e "${BLUE}🎙️ Optional: Voice Input (hyprwhspr):${NC}"
-   echo -e "${YELLOW}•${NC} Install: yay -S hyprwhspr"
+   echo -e "${BLUE}🎙️ Voice Input (hyprwhspr):${NC}"
    echo -e "${YELLOW}•${NC} Setup: hyprwhspr-setup (configure your API key)"
-   echo -e "${YELLOW}•${NC} Enable in waybar: uncomment hyprwhspr module in ~/.config/waybar/config.jsonc"
+   echo -e "${YELLOW}•${NC} The hyprwhspr module is available in waybar"
    echo ""
    echo -e "${BLUE}📁 Backup Location:${NC}"
    echo -e "Your original configs were backed up to: ${backup_dir:-N/A}"
