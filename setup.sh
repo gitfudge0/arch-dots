@@ -219,6 +219,14 @@ install_tools() {
       install_package "blueman"
     fi
 
+    if ! check_tool "nmgui" "nmgui-bin"; then
+      install_package "nmgui-bin" true
+    fi
+
+    if ! check_tool "thunar" "thunar"; then
+      install_package "thunar"
+    fi
+
     # Browser
     if ! check_tool "zen" "zen-browser-bin"; then
       install_package "zen-browser-bin" true
@@ -427,6 +435,8 @@ print_next_steps() {
    echo -e "${YELLOW}•${NC} asusctl: ASUS device control"
    echo -e "${YELLOW}•${NC} nbfc: Notebook fan control"
    echo -e "${YELLOW}•${NC} blueman: Bluetooth management GUI"
+   echo -e "${YELLOW}•${NC} nmgui: Network manager GUI"
+   echo -e "${YELLOW}•${NC} thunar: File manager"
    echo -e "${YELLOW}•${NC} starship: Prompt customization via ~/.config/starship.toml"
    echo ""
    echo -e "${BLUE}🎙️ Optional: Voice Input (hyprwhspr):${NC}"
@@ -448,7 +458,7 @@ ask_permission() {
    echo -e "${YELLOW}•${NC} Install development tools (lazygit, rustup, go, deno, nodejs, ruby-install, rust-analyzer)"
    echo -e "${YELLOW}•${NC} Install screenshot tools (grim, slurp, swappy, flameshot)"
    echo -e "${YELLOW}•${NC} Install virtualization tools (docker, docker-compose, qemu-full)"
-   echo -e "${YELLOW}•${NC} Install system utilities (asusctl, nbfc, blueman)"
+   echo -e "${YELLOW}•${NC} Install system utilities (asusctl, nbfc, blueman, nmgui, thunar)"
    echo -e "${YELLOW}•${NC} Install zen-browser-bin"
    echo -e "${YELLOW}•${NC} Install fonts (Noto, Fira Code, Nerd Fonts, DejaVu)"
    echo -e "${YELLOW}•${NC} Install shell enhancements (zsh, starship, fzf, ripgrep, eza, bat)"
