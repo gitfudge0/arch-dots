@@ -158,13 +158,19 @@ install_tools() {
      install_package "playerctl"
    fi
 
-   if ! check_tool "hyprshot" "hyprshot"; then
+    if ! check_tool "hyprshot" "hyprshot"; then
       install_package "hyprshot" true
     fi
 
     if ! check_tool "flameshot" "flameshot"; then
       install_package "flameshot" true
     fi
+
+    # Optional: hyprwhspr voice input (AUR)
+    # Uncomment to install voice input support for waybar
+    # if ! check_tool "hyprwhspr" "hyprwhspr"; then
+    #   install_package "hyprwhspr" true
+    # fi
 
     # Development tools
     if ! check_tool "rustup" "rustup"; then
@@ -405,6 +411,12 @@ print_next_steps() {
    echo -e "${YELLOW}•${NC} Super + Shift + S: Open screenshot menu (grim + slurp + swappy)"
    echo -e "${YELLOW}•${NC} Super + Shift + F: Flameshot GUI"
    echo ""
+   echo -e "${BLUE}🖥️ Waybar Features:${NC}"
+   echo -e "${YELLOW}•${NC} Idle Inhibitor: Click the caffeine icon to prevent screen sleep"
+   echo -e "${YELLOW}•${NC} Power Menu: Click the power icon to access shutdown/reboot/logout options"
+   echo -e "${YELLOW}•${NC} Disk Usage: Shows current disk space usage"
+   echo -e "${YELLOW}•${NC} Bluetooth: Click to open blueman-manager"
+   echo ""
    echo -e "${BLUE}🛠️ Development Tools:${NC}"
    echo -e "${YELLOW}•${NC} Rust: rustup, cargo, rust-analyzer"
    echo -e "${YELLOW}•${NC} Go, Deno, Node.js: Ready to use"
@@ -416,6 +428,11 @@ print_next_steps() {
    echo -e "${YELLOW}•${NC} nbfc: Notebook fan control"
    echo -e "${YELLOW}•${NC} blueman: Bluetooth management GUI"
    echo -e "${YELLOW}•${NC} starship: Prompt customization via ~/.config/starship.toml"
+   echo ""
+   echo -e "${BLUE}🎙️ Optional: Voice Input (hyprwhspr):${NC}"
+   echo -e "${YELLOW}•${NC} Install: yay -S hyprwhspr"
+   echo -e "${YELLOW}•${NC} Setup: hyprwhspr-setup (configure your API key)"
+   echo -e "${YELLOW}•${NC} Enable in waybar: uncomment hyprwhspr module in ~/.config/waybar/config.jsonc"
    echo ""
    echo -e "${BLUE}📁 Backup Location:${NC}"
    echo -e "Your original configs were backed up to: ${backup_dir:-N/A}"

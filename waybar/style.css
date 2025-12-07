@@ -1,6 +1,7 @@
-/* @define-color bg0 #212121; */
-/*@define-color bg1 #353535;*/
-/*@define-color bg1 rgba(33,33,33,0.8);*/
+/* Optional: hyprwhspr voice input styling */
+/* Uncomment the line below if hyprwhspr is installed */
+/* @import "/usr/lib/hyprwhspr/config/waybar/hyprwhspr-style.css"; */
+
 @define-color bg1 #212121;
 @define-color fg0 #eeffff;
 @define-color yellow #ffcb6b;
@@ -14,16 +15,15 @@
 }
 
 window#waybar {
-  /* background-color: @bg0; */
   background-color: transparent;
-  color: @fg0; /* didn't affect workspaces */
+  color: @fg0;
 }
 
+/* Left modules */
 #workspaces {
   background-color: @bg1;
   border-radius: 18px;
   padding: 0px 4px;
-
   margin: 8px 4px 0px 8px;
 }
 
@@ -44,8 +44,16 @@ window#waybar {
 }
 
 window#waybar.empty #window {
-  /* hide empty module */
   background-color: transparent;
+}
+
+/* Right modules - standalone */
+#custom-hyprwhspr {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 4px 0px 4px;
+  border-bottom: none;
 }
 
 #tray {
@@ -55,6 +63,7 @@ window#waybar.empty #window {
   margin: 8px 4px 0px 4px;
 }
 
+/* HW group: disk, cpu, memory, temperature, battery */
 #hw {
   background-color: @bg1;
   border-radius: 18px;
@@ -62,52 +71,82 @@ window#waybar.empty #window {
   margin: 8px 4px 0px 4px;
 }
 
-#cpu {
-  margin-right: 8px;
-}
-
-#memory {
-  margin-left: 8px;
+#disk {
   margin-right: 16px;
 }
 
+#cpu {
+  margin-right: 16px;
+}
+
+#memory {
+  margin-right: 16px;
+}
+
+#temperature {
+  margin-right: 16px;
+}
+
+#battery {
+}
+
+/* Connectivity group: network, bluetooth */
+#connectivity {
+  background-color: @bg1;
+  border-radius: 18px;
+  padding: 0px 16px;
+  margin: 8px 4px 0px 4px;
+}
+
+#network {
+  margin-right: 16px;
+}
+
+#bluetooth {
+}
+
+/* Control group: pulseaudio, backlight */
 #control {
   background-color: @bg1;
   border-radius: 18px;
   padding: 0px 16px;
-  margin: 8px 4px 0px 8px;
-}
-
-#battery {
-  margin-right: 8px;
-}
-
-#network {
-  margin: 0px 8px;
-}
-
-#bluetooth {
-  margin: 0px 8px;
+  margin: 8px 4px 0px 4px;
 }
 
 #pulseaudio {
-  margin: 0px 8px;
-}
-#backlight {
-  margin: 0px 8px;
-  margin-right: 0;
+  margin-right: 16px;
 }
 
+#backlight {
+}
+
+/* Clock */
 #clock {
   background-color: @bg1;
   border-radius: 18px;
   padding: 0px 16px;
-  margin: 8px 8px 0px 4px;
+  margin: 8px 4px 0px 4px;
 }
 
-#custom-notification {
+/* System group: idle_inhibitor, notification, powermenu */
+#system {
   background-color: @bg1;
   border-radius: 18px;
   padding: 0px 16px;
   margin: 8px 8px 0px 4px;
+}
+
+#idle_inhibitor {
+  margin-right: 16px;
+}
+
+#idle_inhibitor.activated {
+  color: #fab387;
+}
+
+#custom-notification {
+  margin-right: 16px;
+}
+
+#custom-powermenu {
 }
